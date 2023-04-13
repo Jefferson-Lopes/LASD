@@ -1,0 +1,25 @@
+module counter (
+		input clock, rst,
+		input [3:0] max_count,
+		output reg [3:0] count
+	);
+		
+	// counter up and reset logic
+	always @ (negedge rst, posedge clock) begin
+		
+		// reset counter
+		if (rst == 1'b0) begin
+			count <= 4'b0;
+		end
+		
+		// count up
+		else begin
+			count <= count + 4'b1;
+			
+			if ( count > max_count ) begin
+				count <= 4'b0;
+			end
+		end
+	end
+	
+endmodule
